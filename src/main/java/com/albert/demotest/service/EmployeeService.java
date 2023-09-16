@@ -34,6 +34,7 @@ public class EmployeeService {
         return buildData(newEmployee);
     }
 
+
     public EmployeeDTO updateEmployee(Long id, CreateOrUpdateEmployee createOrUpdateEmployee) {
         final MsEmployee existingEmployee = msEmployeeRepository.findByDeletedAtIsNullAndId(id)
                 .orElseThrow(() -> new RuntimeException("The id was not found"));
