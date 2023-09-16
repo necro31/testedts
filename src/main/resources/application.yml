@@ -1,0 +1,42 @@
+# Server configuration (e.g., port)
+server:
+  port: 8080
+  max-http-header-size: 16KB
+# Spring Boot application settings
+spring:
+  application:
+    name: YourSpringBootApplicationName
+
+# Data source configuration
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:postgresql://localhost:5432/albert
+    username: albert
+    password: secret
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      pool-name: DemotestApplicationJPAHikariCP
+      schema: app
+      connection-timeout: 20000  # milliseconds
+      maximum-pool-size: 5
+      minimum-idle: 2
+      idle-timeout: 30000  # milliseconds
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update  # Options: validate, update, create, create-drop
+    show-sql: true
+
+# Optional: Define JPA entity scanning package
+# spring:
+#   jpa:
+#     hibernate:
+#       naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+#   entity:
+#     scan-packages: com.example.model
+
+# Logging configuration (you can adjust log levels as needed)
+logging:
+  level:
+    org.springframework.web: INFO
+    org.hibernate: INFO
