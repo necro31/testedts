@@ -1,6 +1,7 @@
 package com.albert.demotest.controller;
 
 import com.albert.demotest.dto.CreateOrUpdateEmployee;
+import com.albert.demotest.dto.DeleteEmployee;
 import com.albert.demotest.dto.EmployeeDTO;
 import com.albert.demotest.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,4 +36,13 @@ public class EmployeeController {
         return employeeService.getAllEmployee();
     }
 
+    @PostMapping("/bulk_delete")
+    public void deleteBulkEmployees(@RequestBody List<Long> id) {
+        employeeService.deleteBulkEmployees(id);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteEmployee(@PathVariable Long id){
+        employeeService.deleteEmployee(id);
+    }
 }

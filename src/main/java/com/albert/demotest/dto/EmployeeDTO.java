@@ -14,4 +14,5 @@ public class EmployeeDTO {
     private Long salary;
     private Grade grade;
     private Long salaryWithBonus;
+    private String deletedAt;
 }

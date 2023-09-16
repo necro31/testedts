@@ -8,6 +8,7 @@ import com.albert.demotest.repository.MsEmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -49,6 +50,30 @@ public class EmployeeService {
         return buildData(existingEmployee);
     }
 
+    public void deleteBulkEmployees(List<Long> ids) {
+        final List<MsEmployee> existingEmployee = msEmployeeRepository.findByDeletedAtIsNullAndIdIn(ids);
+
+        for (MsEmployee msEmployee : existingEmployee){
+            msEmployee.setDeletedAt(Instant.now());
+        }
+
+        msEmployeeRepository.saveAll(existingEmployee);
+    }
+
+    public void deleteEmployee(Long id) {
+        final MsEmployee existingEmployee = msEmployeeRepository.findByDeletedAtIsNullAndId(id)
+                .orElseThrow(() -> new RuntimeException("The id was not found"));
+
+        //final List<MsEmployee> Employee = msEmployeeRepository.findAllByDeletedAtIsNull();
+
+
+        msEmployeeRepository.save(
+                existingEmployee.setDeletedAt(Instant.now())
+        );
+
+    //return buildData(existingEmployee);
+    }
+
     public List<EmployeeDTO> getAllEmployee() {
         final List<MsEmployee> allEmployee = msEmployeeRepository.findAllByDeletedAtIsNull();
 
@@ -60,6 +85,8 @@ public class EmployeeService {
                 .setId(msEmployee.getId())
                 .setCreatedAt(msEmployee.getCreatedAt().toString())
                 .setUpdatedAt(msEmployee.getUpdatedAt().toString())
+                //.setDeletedAt(!ObjectUtils.isEmpty(msEmployee.getDeletedAt()) ? msEmployee.getDeletedAt().toString() : "")
+                //.setDeletedAt(msEmployee.getDeletedAt().toString())
                 .setName(msEmployee.getName())
                 .setSalary(msEmployee.getSalary())
                 .setGrade(msEmployee.getGrade())

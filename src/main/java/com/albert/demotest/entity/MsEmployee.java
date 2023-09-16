@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.experimental.Accessors;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.Instant;
@@ -12,6 +13,7 @@ import java.time.Instant;
 @Data
 @Accessors(chain = true)
 @Entity
+@DynamicUpdate
 public class MsEmployee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
