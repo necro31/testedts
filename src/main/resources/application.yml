@@ -5,7 +5,7 @@ server:
 # Spring Boot application settings
 spring:
   application:
-    name: YourSpringBootApplicationName
+    name: demotest
 
 # Data source configuration
   datasource:
@@ -36,7 +36,15 @@ spring:
 #     scan-packages: com.example.model
 
 # Logging configuration (you can adjust log levels as needed)
+
 logging:
   level:
     org.springframework.web: INFO
     org.hibernate: INFO
+
+#SWAGGER UI
+springdoc:
+  api-docs:
+    path: /demotest-doc
+  swagger-ui:
+    path: /swagger-ui-demotest.html
