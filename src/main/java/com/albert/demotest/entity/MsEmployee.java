@@ -2,7 +2,7 @@ package com.albert.demotest.entity;
 
 import com.albert.demotest.enums.Grade;
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 import lombok.experimental.Accessors;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.DynamicUpdate;
@@ -14,6 +14,11 @@ import java.time.Instant;
 @Accessors(chain = true)
 @Entity
 @DynamicUpdate
+@Getter
+@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class MsEmployee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,6 +27,7 @@ public class MsEmployee {
     private Instant createdAt;
     @UpdateTimestamp
     private Instant updatedAt;
+
     private Instant deletedAt;
 
     private String name;
